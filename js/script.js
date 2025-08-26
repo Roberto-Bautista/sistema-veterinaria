@@ -23,37 +23,27 @@ const AppConfig = {
  * Función principal para mostrar secciones
  * @param {string} sectionId - ID de la sección a mostrar
  */
-function showSection(sectionId) {
-    // Validar que el sectionId existe
-    const targetSection = document.getElementById(sectionId);
-    if (!targetSection) {
-        console.error(`Error: Sección '${sectionId}' no encontrada`);
-        return;
-    }
-
+function showSection(sectionId, event = null) {
     // Ocultar todas las secciones
     const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
+    sections.forEach(section => section.classList.remove('active'));
 
     // Quitar clase active de todos los botones
     const buttons = document.querySelectorAll('.nav-btn');
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
+    buttons.forEach(button => button.classList.remove('active'));
 
-    // Mostrar sección seleccionada
-    targetSection.classList.add('active');
-    
-    // Activar botón correspondiente
+    // Mostrar la sección seleccionada
+    const target = document.getElementById(sectionId);
+    if (target) {
+        target.classList.add('active');
+    }
+
+    // Activar botón correspondiente si viene de un click
     if (event && event.target) {
         event.target.classList.add('active');
     }
-
-    // Log para debug
-    console.log(`Navegación: Mostrando sección '${sectionId}'`);
 }
+
 
 /**
  * Función para mostrar la fecha actual
